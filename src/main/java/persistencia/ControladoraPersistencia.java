@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logica.Odontologo;
+import logica.Secretaria;
 import logica.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -44,6 +46,29 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void crearOdontologo(Odontologo odontologo) {
+        odontologoController.create(odontologo);   
+    }
+
+    public List<Odontologo> getOdonto() {
+        return odontologoController.findOdontologoEntities();
+    }    
+
+    public void crearSecretaria(Secretaria secretaria) {
+        secretariaController.create(secretaria);
+    }
+
+    public List<Secretaria> getSecretarias() {
+        return secretariaController.findSecretariaEntities();
+    }
+
+    public void deleteSecretaria(int id) {
+        try {
+            secretariaController.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
  
 }

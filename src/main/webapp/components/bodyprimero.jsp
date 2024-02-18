@@ -43,7 +43,7 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Acciones:</h6>
-                            <a class="collapse-item" href="">Ver Odontólogos</a>
+                            <a class="collapse-item" href="SvOdontologo">Ver Odontólogos</a>
                             <a class="collapse-item" href="altaOdontologo.jsp">Alta Odontólogos</a>
                         </div>
                     </div>
@@ -62,6 +62,7 @@
                             <h6 class="collapse-header">Acciones:</h6>
                             <a class="collapse-item" href="">Ver Pacientes</a>
                             <a class="collapse-item" href="">Alta Pacientes</a>
+                            <a class="collapse-item" href="">Alta Responsables</a>
                         </div>
                     </div>
                 </li>
@@ -78,6 +79,24 @@
                             <h6 class="collapse-header">Acciones:</h6>
                             <a class="collapse-item" href="SvUsuarios">Ver Usuarios</a>
                             <a class="collapse-item" href="altaUsuario.jsp">Alta Usuarios</a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFor"
+                       aria-expanded="true" aria-controls="collapseTree">
+                        <i class="fas fa-solid fa-clipboard"></i>
+                        <span>Secretaria</span>
+                    </a>
+                    <div id="collapseFor" class="collapse" aria-labelledby="headingFor"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Acciones:</h6>
+                            <a class="collapse-item" href="SvSecretaria">Ver Secretaria</a>
+                            <a class="collapse-item" href="altaSecretaria.jsp">Alta Secretaria</a>
+                            <a class="collapse-item" href="">Alta Horarios</a>
+                            <a class="collapse-item" href="">Alta Turnos</a>
                         </div>
                     </div>
                 </li>

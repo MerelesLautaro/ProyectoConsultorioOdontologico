@@ -58,7 +58,7 @@ public class SvUsuarios extends HttpServlet {
             String msjError = "Verifique los datos ingresados";
             HttpSession sessionError = request.getSession();
             sessionError.setAttribute("msjError", msjError);
-            response.sendRedirect("altaUsuario.jsp");   
+            response.sendRedirect("altaUsuario.jsp");  
         }
     }
 
