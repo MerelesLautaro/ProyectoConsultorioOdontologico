@@ -8,7 +8,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-solid fa-tooth"></i>
                     </div>
@@ -44,7 +44,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Acciones:</h6>
                             <a class="collapse-item" href="SvOdontologo">Ver Odontólogos</a>
-                            <a class="collapse-item" href="altaOdontologo.jsp">Alta Odontólogos</a>
+                            <a class="collapse-item" href="SvDeleteOdontologo">Alta Odontólogos</a>
                         </div>
                     </div>
                 </li>
@@ -95,7 +95,7 @@
                             <h6 class="collapse-header">Acciones:</h6>
                             <a class="collapse-item" href="SvSecretaria">Ver Secretaria</a>
                             <a class="collapse-item" href="altaSecretaria.jsp">Alta Secretaria</a>
-                            <a class="collapse-item" href="">Alta Horarios</a>
+                            <a class="collapse-item" href="SvHorario">Alta Horarios</a>
                             <a class="collapse-item" href="">Alta Turnos</a>
                         </div>
                     </div>

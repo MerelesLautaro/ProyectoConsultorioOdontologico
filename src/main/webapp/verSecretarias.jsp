@@ -63,11 +63,11 @@
                                 </button>
                                 <input type="hidden" name="id" value="<%=secretaria.getId() %>"><!-- Obtenemos la ID para el metodo de eliminar -->
                             </form>                          
-                            <form name="edit" action="" method="GET"><!-- Llama al Servelets encargado de editar -->
+                            <form name="edit" action="SvEditSecretaria" method="GET"><!-- Llama al Servelets encargado de editar -->
                                 <button type="submit" class="btn btn-primary btn-user btn-block" style="margin-left: 5px">
                                     <i class="fas fa-pencil-alt"></i> Editar
                                 </button>
-                                <input type="hidden" name="id"><!-- Obtenemos la ID para el metodo de editar -->
+                                <input type="hidden" name="id"  value="<%=secretaria.getId() %>"><!-- Obtenemos la ID para el metodo de editar -->
                             </form>   
                         </td>
                     </tr>

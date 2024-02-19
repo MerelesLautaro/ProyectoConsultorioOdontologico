@@ -37,7 +37,7 @@ public class Controladora {
         controlPersistencia.editUser(usuario);
     }
 
-    public void crearOdontolog(String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String especialidad) {
+    public void crearOdontolog(String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String especialidad, String usuarioOdon, int idHorario) {
         Odontologo odontologo = new Odontologo();
         
         odontologo.setDni(dni);
@@ -47,6 +47,22 @@ public class Controladora {
         odontologo.setDireccion(direccion);
         odontologo.setFecha_nac(fechaNac);
         odontologo.setEspecialidad(especialidad);
+        
+        //Comparamos el usuario ingresado para el odontologo con los existentes
+        //Si el usuario existe lo seteamos.
+        Usuario usu = new Usuario();        
+        usu = this.traerUsuario(usuarioOdon);     
+        if(usu!=null){
+            odontologo.setUsuario(usu);
+        }        
+        
+        //Comparamos el horario ingresado para el odontologo con los existentes
+        //Si el horario existe lo seteamos.
+        Horario horarioLaboral = new Horario();
+        horarioLaboral = this.traerHorario(idHorario);
+        if(horarioLaboral!=null){
+            odontologo.setHorario(horarioLaboral);
+        }
         
         controlPersistencia.crearOdontologo(odontologo);
     }
@@ -97,5 +113,101 @@ public class Controladora {
         controlPersistencia.deleteSecretaria(id);
     }
 
+    public Secretaria getOneSecretaria(int id) {
+        return controlPersistencia.getOneSecretaria(id);
+    }
+
+    public void editarSecretaria(Secretaria secretaria, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String sector, String nombreUsuario) {
+        secretaria.setDni(dni);
+        secretaria.setNombre(nombre);
+        secretaria.setApellido(apellido);
+        secretaria.setTelefono(telefono);
+        secretaria.setDireccion(direccion);
+        secretaria.setFecha_nac(fechaNac);
+        secretaria.setSector(sector);
         
+        Usuario usu = new Usuario();
+        
+        usu = this.traerUsuario(nombreUsuario);
+        
+        if(usu!=null){
+            secretaria.setUsuario(usu);
+        }
+        
+        controlPersistencia.editarSecretaria(secretaria);
+    }
+
+    public void crearHorario(String horarioInicio, String horarioFin) {
+        Horario horario = new Horario();
+        horario.setHorario_inicio(horarioInicio);
+        horario.setHorario_fin(horarioFin);               
+        controlPersistencia.crearHorario(horario);
+    }
+
+    public List<Horario> getHorarios() {
+        return controlPersistencia.getHorarios();
+    }
+
+    public void deleteHorario(int id) {
+        controlPersistencia.deleteHorario(id);
+    }
+
+    public Horario getOneHorario(int id) {
+        return controlPersistencia.getOneHorario(id);
+    }
+
+    public void editHorario(Horario editHorario, String horaInicio, String horaFin) {
+        editHorario.setHorario_fin(horaFin);
+        editHorario.setHorario_inicio(horaInicio);
+        
+        controlPersistencia.editHorario(editHorario);
+    }
+
+    private Horario traerHorario(int idHorario) {
+        List<Horario> horariosLaborales = controlPersistencia.getHorarios();
+        
+        for(Horario horaLaboral: horariosLaborales){
+            if(idHorario ==(horaLaboral.getId_horario())){
+                return horaLaboral;
+            }
+        }
+        return null;
+    }
+
+    public void deleteOdontologo(int id) {
+        controlPersistencia.deleteOdontologo(id);
+    }
+
+    public Odontologo getOneOdontologo(int id) {
+        return controlPersistencia.getOneOdontologo(id);
+    }
+
+    public void editOdontologo(Odontologo odontologo, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String especialidad, String nombreUsuario, int idHorario) {
+        odontologo.setDni(dni);
+        odontologo.setNombre(nombre);
+        odontologo.setApellido(apellido);
+        odontologo.setTelefono(telefono);
+        odontologo.setDireccion(direccion);
+        odontologo.setFecha_nac(fechaNac);
+        odontologo.setEspecialidad(especialidad);
+        
+        //Comparamos el usuario ingresado para el odontologo con los existentes
+        //Si el usuario existe lo seteamos.
+        Usuario usu = new Usuario();        
+        usu = this.traerUsuario(nombreUsuario);     
+        if(usu!=null){
+            odontologo.setUsuario(usu);
+        }        
+        
+        //Comparamos el horario ingresado para el odontologo con los existentes
+        //Si el horario existe lo seteamos.
+        Horario horarioLaboral = new Horario();
+        horarioLaboral = this.traerHorario(idHorario);
+        if(horarioLaboral!=null){
+            odontologo.setHorario(horarioLaboral);
+        }
+        
+        controlPersistencia.editOdontologo(odontologo);
+    }
+ 
 }

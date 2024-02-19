@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logica.Horario;
 import logica.Odontologo;
 import logica.Secretaria;
 import logica.Usuario;
@@ -70,5 +71,65 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
+
+    public Secretaria getOneSecretaria(int id) {
+        return secretariaController.findSecretaria(id);
+    }
+
+    public void editarSecretaria(Secretaria secretaria) {
+        try {
+            secretariaController.edit(secretaria);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void crearHorario(Horario horario) {
+        horarioController.create(horario);
+    }
+
+    public List<Horario> getHorarios() {
+        return horarioController.findHorarioEntities();
+    }
+
+    public void deleteHorario(int id) {
+        try {
+            horarioController.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Horario getOneHorario(int id) {
+        return horarioController.findHorario(id);
+    }
+
+    public void editHorario(Horario editHorario) {
+        try {
+            horarioController.edit(editHorario);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteOdontologo(int id) {
+        try {
+            odontologoController.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Odontologo getOneOdontologo(int id) {
+        return odontologoController.findOdontologo(id);
+    }
+
+    public void editOdontologo(Odontologo odontologo) {
+        try {
+            odontologoController.edit(odontologo);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

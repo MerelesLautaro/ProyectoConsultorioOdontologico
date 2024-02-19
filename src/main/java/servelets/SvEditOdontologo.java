@@ -18,8 +18,8 @@ import logica.Controladora;
 import logica.Horario;
 import logica.Odontologo;
 
-@WebServlet(name = "SvOdontologo", urlPatterns = {"/SvOdontologo"})
-public class SvOdontologo extends HttpServlet {
+@WebServlet(name = "SvEditOdontologo", urlPatterns = {"/SvEditOdontologo"})
+public class SvEditOdontologo extends HttpServlet {
     Controladora control = new Controladora();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -29,20 +29,25 @@ public class SvOdontologo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Odontologo> listOdonto = new ArrayList<Odontologo>();
-             
-        listOdonto = control.getOdonto();
-        
+        int id = Integer.parseInt(request.getParameter("id"));
+        Odontologo odontologo = control.getOneOdontologo(id);        
         HttpSession mysession = request.getSession();
-        mysession.setAttribute("listOdonto",listOdonto);
+        mysession.setAttribute("editOdontologo", odontologo);
         
-        response.sendRedirect("verOdontologos.jsp");
+        List<Horario> listHorarios = new ArrayList<>();        
+        listHorarios = control.getHorarios();        
+        HttpSession mysessionTwo = request.getSession();
+        mysessionTwo.setAttribute("listHorarios",listHorarios);
+        
+        response.sendRedirect("editOdontologo.jsp");
+        
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Odontologo odontologo = (Odontologo)request.getSession().getAttribute("editOdontologo");
         try{
             String dni = request.getParameter("txtDniOdon");
             String nombre = request.getParameter("txtNombreOdon");
@@ -57,16 +62,16 @@ public class SvOdontologo extends HttpServlet {
             Date fechaNac = dateFormat.parse(fechaNacStr);
             String especialidad = request.getParameter("txtEspecialidadOdon");
             
-            control.crearOdontolog(dni,nombre,apellido,telefono,direccion,fechaNac,especialidad,nombreUsuario,idHorario);
+            control.editOdontologo(odontologo,dni,nombre,apellido,telefono,direccion,fechaNac,especialidad,nombreUsuario,idHorario);
             
-            response.sendRedirect("altaOdontologo.jsp");
+            response.sendRedirect("SvOdontologo");
             
         } catch (ParseException ex) {
             Logger.getLogger(SvOdontologo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
-    
+
     @Override
     public String getServletInfo() {
         return "Short description";

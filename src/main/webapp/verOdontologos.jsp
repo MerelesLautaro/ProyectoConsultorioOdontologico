@@ -21,6 +21,8 @@
                         <th>Dirección</th>
                         <th>Fecha_de_Nac.</th>
                         <th>Especialidad</th>
+                        <th>Horario</th>
+                        <th>Usuario</th>
                         <th style="width: 210px">Acción</th>
                     </tr>
                 </thead>
@@ -34,6 +36,8 @@
                         <th>Dirección</th>
                         <th>Fecha_de_Nac.</th>
                         <th>Especialidad</th>
+                        <th>Horario</th>
+                        <th>Usuario</th>
                         <th style="width: 210px">Acción</th>
                     </tr>
                 </tfoot>
@@ -53,18 +57,20 @@
                         <td><%=odontologo.getDireccion() %></td>
                         <td><%=odontologo.getFecha_nac() %></td>
                         <td><%=odontologo.getEspecialidad() %></td>
+                        <td><%=odontologo.getHorario().getHorario_inicio() %> a <%=odontologo.getHorario().getHorario_fin() %></td>
+                        <td><%=odontologo.getUsuario().getNombreUsuario() %></td>
                         <td style="display: flex; width: 230px">  
-                            <form name="delete" action="" method="POST"><!-- Llama al Servelets encargado de eliminar -->
+                            <form name="delete" action="SvDeleteOdontologo" method="POST"><!-- Llama al Servelets encargado de eliminar -->
                                 <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: red; margin-right: 5px">
                                     <i class="fas fa-solid fa-trash"></i> Eliminar                                   
                                 </button>
-                                <input type="hidden" name="id"><!-- Obtenemos la ID para el metodo de eliminar -->
+                                <input type="hidden" name="id" value="<%=odontologo.getId() %>"><!-- Obtenemos la ID para el metodo de eliminar -->
                             </form>                          
-                            <form name="edit" action="" method="GET"><!-- Llama al Servelets encargado de editar -->
+                            <form name="edit" action="SvEditOdontologo" method="GET"><!-- Llama al Servelets encargado de editar -->
                                 <button type="submit" class="btn btn-primary btn-user btn-block" style="margin-left: 5px">
                                     <i class="fas fa-pencil-alt"></i> Editar
                                 </button>
-                                <input type="hidden" name="id"><!-- Obtenemos la ID para el metodo de editar -->
+                                <input type="hidden" name="id" value="<%=odontologo.getId() %>"><!-- Obtenemos la ID para el metodo de editar -->
                             </form>   
                         </td>
                     </tr>
