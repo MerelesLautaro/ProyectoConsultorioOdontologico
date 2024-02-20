@@ -209,5 +209,95 @@ public class Controladora {
         
         controlPersistencia.editOdontologo(odontologo);
     }
+
+    public void createResponsable(String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String tipoRes) {
+        Responsable responsable = new Responsable();
+        responsable.setDni(dni);
+        responsable.setNombre(nombre);
+        responsable.setApellido(apellido);
+        responsable.setTelefono(telefono);
+        responsable.setDireccion(direccion);
+        responsable.setFecha_nac(fechaNac);
+        responsable.setTipo_responsabilidad(tipoRes);
+        
+        controlPersistencia.createResponsable(responsable);
+    }
+
+    public List<Responsable> getResponsables() {
+        return controlPersistencia.getResponsables();
+    }
+
+    public Responsable getOneResponsable(int id) {
+        return controlPersistencia.getOneResponsable(id);
+    }
+
+    public void editResponsable(Responsable responsableEdit, String dni, String nombre, String apellido, String direccion, String tipoRes, Date fechaNac) {
+        responsableEdit.setDni(dni);
+        responsableEdit.setNombre(nombre);
+        responsableEdit.setApellido(apellido);
+        responsableEdit.setDireccion(direccion);
+        responsableEdit.setTipo_responsabilidad(tipoRes);
+        responsableEdit.setFecha_nac(fechaNac);
+        
+        controlPersistencia.editResponsable(responsableEdit);
+    }
+
+    public void deleteResponsable(int id) {
+        controlPersistencia.deleteResponsable(id);
+    }
+
+    public void createPaciente(String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String tipoSangre, boolean obraSocial, int idResponsable) {
+        Paciente paciente = new Paciente();
+        paciente.setDni(dni);
+        paciente.setNombre(nombre);
+        paciente.setApellido(apellido);
+        paciente.setTelefono(telefono);
+        paciente.setDireccion(direccion);
+        paciente.setFecha_nac(fechaNac);
+        paciente.setTipo_sangre(tipoSangre);
+        paciente.setTiene_OS(obraSocial);
+        
+        Responsable responsable = new Responsable();
+        responsable = this.getOneResponsable(idResponsable);
+        paciente.setResponsable(responsable);
+        
+        controlPersistencia.createPaciente(paciente);
+        
+    }
+
+    public List<Paciente> getPacientes() {
+        return controlPersistencia.getPacientes();
+    }
+
+    public void deletePaciente(int id) {
+        controlPersistencia.deletePaciente(id);
+    }
+
+    public Paciente getOnePaciente(int id) {
+        return controlPersistencia.getOnePaciente(id);
+    }
+
+    public void editPaciente(Paciente pacienteEdit, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNac, String tipoSangre, boolean obraSocial, int idResponsable) {
+        
+        pacienteEdit.setDni(dni);
+        pacienteEdit.setNombre(nombre);
+        pacienteEdit.setApellido(apellido);
+        pacienteEdit.setTelefono(telefono);
+        pacienteEdit.setDireccion(direccion);
+        pacienteEdit.setFecha_nac(fechaNac);
+        pacienteEdit.setTipo_sangre(tipoSangre);
+        pacienteEdit.setTiene_OS(obraSocial);
+        
+        Responsable responsable = new Responsable();
+        responsable = this.getOneResponsable(idResponsable);
+        pacienteEdit.setResponsable(responsable);
+        
+        controlPersistencia.editPaciente(pacienteEdit);
+    }
+
+
+
+
+
  
 }

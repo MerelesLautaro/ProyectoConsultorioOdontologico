@@ -13,7 +13,7 @@ public class Odontologo extends Persona implements Serializable {
     private String especialidad;
     
     //Relacion de Odontologo con la lista de turnos. (1 a N)
-    @OneToOne(mappedBy="odontologo")
+    @OneToMany(mappedBy="odontologo")
     private List<Turno> listaTurnos;
     //Relacion de Odontologo con su usuario (para el login) (1 a 1)
     @OneToOne

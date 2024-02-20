@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.Horario;
 import logica.Odontologo;
+import logica.Paciente;
+import logica.Responsable;
 import logica.Secretaria;
 import logica.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
@@ -127,6 +129,62 @@ public class ControladoraPersistencia {
     public void editOdontologo(Odontologo odontologo) {
         try {
             odontologoController.edit(odontologo);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void createResponsable(Responsable responsable) {
+        responsableController.create(responsable);
+    }
+
+    public List<Responsable> getResponsables() {
+        return responsableController.findResponsableEntities();
+    }
+
+    public Responsable getOneResponsable(int id) {
+        return responsableController.findResponsable(id);
+    }
+
+    public void editResponsable(Responsable responsableEdit) {
+        try {
+            responsableController.edit(responsableEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteResponsable(int id) {
+        try {
+            responsableController.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void createPaciente(Paciente paciente) {
+        pacienteController.create(paciente);
+    }
+
+    public List<Paciente> getPacientes() {
+        return pacienteController.findPacienteEntities();
+    }
+
+    public void deletePaciente(int id) {
+        try {
+            pacienteController.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Paciente getOnePaciente(int id) {
+        return pacienteController.findPaciente(id);
+    }
+
+    public void editPaciente(Paciente pacienteEdit) {
+        try {
+            pacienteController.edit(pacienteEdit);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
