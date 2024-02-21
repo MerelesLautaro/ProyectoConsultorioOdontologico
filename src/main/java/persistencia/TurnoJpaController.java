@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package persistencia;
 
 import java.io.Serializable;
@@ -13,6 +10,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import logica.Odontologo;
+import logica.Paciente;
 import logica.Turno;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -41,7 +40,25 @@ public class TurnoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Odontologo odontologo = turno.getOdontologo();
+            if (odontologo != null) {
+                odontologo = em.getReference(odontologo.getClass(), odontologo.getId());
+                turno.setOdontologo(odontologo);
+            }
+            Paciente paciente = turno.getPaciente();
+            if (paciente != null) {
+                paciente = em.getReference(paciente.getClass(), paciente.getId());
+                turno.setPaciente(paciente);
+            }
             em.persist(turno);
+            if (odontologo != null) {
+                odontologo.getListaTurnos().add(turno);
+                odontologo = em.merge(odontologo);
+            }
+            if (paciente != null) {
+                paciente.getListaTurnos().add(turno);
+                paciente = em.merge(paciente);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -55,7 +72,36 @@ public class TurnoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Turno persistentTurno = em.find(Turno.class, turno.getId_turno());
+            Odontologo odontologoOld = persistentTurno.getOdontologo();
+            Odontologo odontologoNew = turno.getOdontologo();
+            Paciente pacienteOld = persistentTurno.getPaciente();
+            Paciente pacienteNew = turno.getPaciente();
+            if (odontologoNew != null) {
+                odontologoNew = em.getReference(odontologoNew.getClass(), odontologoNew.getId());
+                turno.setOdontologo(odontologoNew);
+            }
+            if (pacienteNew != null) {
+                pacienteNew = em.getReference(pacienteNew.getClass(), pacienteNew.getId());
+                turno.setPaciente(pacienteNew);
+            }
             turno = em.merge(turno);
+            if (odontologoOld != null && !odontologoOld.equals(odontologoNew)) {
+                odontologoOld.getListaTurnos().remove(turno);
+                odontologoOld = em.merge(odontologoOld);
+            }
+            if (odontologoNew != null && !odontologoNew.equals(odontologoOld)) {
+                odontologoNew.getListaTurnos().add(turno);
+                odontologoNew = em.merge(odontologoNew);
+            }
+            if (pacienteOld != null && !pacienteOld.equals(pacienteNew)) {
+                pacienteOld.getListaTurnos().remove(turno);
+                pacienteOld = em.merge(pacienteOld);
+            }
+            if (pacienteNew != null && !pacienteNew.equals(pacienteOld)) {
+                pacienteNew.getListaTurnos().add(turno);
+                pacienteNew = em.merge(pacienteNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -84,6 +130,16 @@ public class TurnoJpaController implements Serializable {
                 turno.getId_turno();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The turno with id " + id + " no longer exists.", enfe);
+            }
+            Odontologo odontologo = turno.getOdontologo();
+            if (odontologo != null) {
+                odontologo.getListaTurnos().remove(turno);
+                odontologo = em.merge(odontologo);
+            }
+            Paciente paciente = turno.getPaciente();
+            if (paciente != null) {
+                paciente.getListaTurnos().remove(turno);
+                paciente = em.merge(paciente);
             }
             em.remove(turno);
             em.getTransaction().commit();

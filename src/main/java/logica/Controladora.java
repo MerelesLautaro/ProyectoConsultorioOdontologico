@@ -295,6 +295,51 @@ public class Controladora {
         controlPersistencia.editPaciente(pacienteEdit);
     }
 
+    public void createTurno(String atencion, Date fechaTurno, String horaTurno, int idOdontologo, int idPaciente) {
+        Turno turno = new Turno();
+        turno.setAtencion(atencion);
+        turno.setFecha_turno(fechaTurno);
+        turno.setHora_turno(horaTurno);
+        
+        Odontologo odontologo = new Odontologo();
+        odontologo = this.getOneOdontologo(idOdontologo);
+        turno.setOdontologo(odontologo);
+        
+        Paciente paciente = new Paciente();
+        paciente = this.getOnePaciente(idPaciente);
+        turno.setPaciente(paciente);
+        
+        controlPersistencia.createTurno(turno);
+    }
+
+    public List<Turno> getTurnos() {
+        return controlPersistencia.getTurnos();
+    }
+
+    public void deleteTurno(int id) {
+        controlPersistencia.deleteTurno(id);
+    }
+
+    public Turno getOneTurno(int id) {
+        return controlPersistencia.getOneTurno(id);
+    }
+
+    public void editTurno(Turno turnoEdit, String atencion, Date fechaTurno, String horaTurno, int idOdontologo, int idPaciente) {
+        turnoEdit.setAtencion(atencion);
+        turnoEdit.setFecha_turno(fechaTurno);
+        turnoEdit.setHora_turno(horaTurno);
+        
+        Odontologo odontologo = new Odontologo();
+        odontologo = this.getOneOdontologo(idOdontologo);
+        turnoEdit.setOdontologo(odontologo);
+        
+        Paciente paciente = new Paciente();
+        paciente = this.getOnePaciente(idPaciente);
+        turnoEdit.setPaciente(paciente);
+        
+        controlPersistencia.editTurno(turnoEdit);
+    }
+
 
 
 

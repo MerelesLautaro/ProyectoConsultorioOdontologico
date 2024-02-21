@@ -96,7 +96,7 @@
                             <a class="collapse-item" href="SvSecretaria">Ver Secretaria</a>
                             <a class="collapse-item" href="altaSecretaria.jsp">Alta Secretaria</a>
                             <a class="collapse-item" href="SvHorario">Alta Horarios</a>
-                            <a class="collapse-item" href="">Alta Turnos</a>
+                            <a class="collapse-item" href="SvTurno">Alta Turnos</a>
                         </div>
                     </div>
                 </li>
